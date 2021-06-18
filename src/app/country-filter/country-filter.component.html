@@ -1,0 +1,31 @@
+<form (ngSubmit)="filter()" #filterForm="ngForm">
+  <div class="form-group">
+    <div class="row mb-3">
+      <div class="col-12 col-sm-6">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" [(ngModel)]="filterModel.name" name="name">
+      </div>
+      <div class="col-12 col-sm-6">
+        <label for="code">Code</label>
+        <input type="text" class="form-control" id="code" [(ngModel)]="filterModel.code" name="code">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-sm-6">
+        <label for="minArea">Min superficie</label>
+        <input type="number" class="form-control" id="minArea" [(ngModel)]="filterModel.minArea" name="minArea">
+      </div>
+      <div class="col-12 col-sm-6">
+        <label for="maxArea">Max superficie</label>
+        <input type="number" class="form-control" id="maxArea" [(ngModel)]="filterModel.maxArea" name="maxArea">
+      </div>
+    </div>
+  </div>
+
+
+  <br>
+
+  <button type="submit" class="btn btn-primary" [disabled]="filterForm.invalid">
+    Filtra
+  </button>
+</form>

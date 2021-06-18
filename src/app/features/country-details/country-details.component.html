@@ -1,0 +1,23 @@
+<div class="container-fluid" *ngIf="country">
+  <div class="child-country row">
+    <div class="col-12 col-sm-2">
+      <br>
+      <app-image-viewer [url]="country.flag"></app-image-viewer>
+      <br>
+    </div>
+
+    <div class="col-12 col-sm-10">
+      <div>
+        <br>
+        <h3>Nome del paese: {{country.name}}</h3>
+        <h3>Capitale: {{country.capital}}</h3>
+      </div>
+
+    </div>
+
+  </div>
+  <div>
+    <app-current-weather [loc]="country.capital"></app-current-weather>
+  </div>
+
+</div>

@@ -1,0 +1,80 @@
+<h4 class="center" *ngIf='resultFound()'>Meteo {{currentWeather.name}}</h4>
+<table *ngIf='resultFound()'>
+  <tbody>
+    <tr>
+      <td>
+        <h5>Temperatura corrente:</h5>
+      </td>
+      <td>
+        <h5>{{currentWeather.main?.temp - 273.15 | number:'1.0-0'}}<sup>o</sup>C</h5>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <h5>Temperatura Massima:</h5>
+      </td>
+      <td>
+        <h5>{{currentWeather.main?.temp - 273.15 | number:'1.0-0'}}<sup>o</sup>C</h5>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <h5>Temperatura Minima:</h5>
+      </td>
+      <td>
+        <h5>{{currentWeather.main?.temp_min - 273.15 | number:'1.0-0'}}<sup>o</sup>C</h5>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <h5>Densità nuvole:</h5>
+      </td>
+      <td>
+        <h5>{{currentWeather.clouds?.all}}%</h5>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <h5>Umidità</h5>
+      </td>
+      <td>
+        <h5>{{currentWeather.main?.humidity}}%</h5>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <h5>Pressione</h5>
+      </td>
+      <td>
+        <h5>{{currentWeather.main?.pressure}}mb</h5>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <h5>Alba</h5>
+      </td>
+      <td>
+        <h5>{{currentWeather.sys?.sunrise*1000 | date:'long'}}</h5>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <h5>Tramonto</h5>
+      </td>
+      <td>
+        <h5>{{currentWeather.sys?.sunset*1000 | date:'long'}}</h5>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <h5>Visibilità</h5>
+      </td>
+      <td>
+        <h5>{{currentWeather.visibility}}m</h5>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div *ngIf='!resultFound()'>
+  <h1 class="center">{{msg || 'Failed to get weather.'}}</h1>
+</div>

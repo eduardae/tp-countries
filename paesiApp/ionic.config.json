@@ -1,0 +1,7 @@
+{
+  "name": "paesiApp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

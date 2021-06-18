@@ -1,0 +1,41 @@
+.content {
+  padding-top: 24px;
+
+  table {
+    margin-left: 5%;
+    border: 1px solid #666;
+    border-spacing: 0px;
+    th {
+      padding: 8px;
+      border: 1px solid #666;
+      text-align: left;
+
+      &:first-of-type {
+        text-align: center;
+      }
+    }
+    tr {
+      td {
+        padding: 8px;
+        border: 1px solid #666;
+
+        ul {
+          padding-left: 16px;
+        }
+      }
+    }
+  }
+}
+
+.navbar {
+  img {
+    display: inline-block;
+    margin: 8px 8px;
+  }
+}
+
+.country-select {
+  display: block;
+  margin-left: 5%;
+  margin-top: 72px;
+}

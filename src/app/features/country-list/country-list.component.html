@@ -1,0 +1,61 @@
+
+<div class="container-fluid">
+  <div class="country-select">
+    <p>
+      <strong>Seleziona un paese</strong>
+    </p>
+
+    <select class="browser-default custom-select custom-select-lg mb-3"  [(ngModel)]="selectedCountry" (change)="manageCountrySelect(selectedCountry)">
+      <option *ngFor="let country of originalPaesi" [ngValue]="country" [label]="country.name">
+      </option>
+    </select>
+  </div>
+
+  <br>
+
+  <app-country-filter [countryList]="originalPaesi" (filterEvent)="manageFilterEvent($event)"></app-country-filter>
+
+  <br>
+
+  <div class="content" role="main" *ngIf="paesi && paesi.length !== 0">
+    <table class="table">
+      <thead>
+        <th>Bandiera</th>
+        <th>Nome</th>
+        <th>Popolazione</th>
+        <th>Capitale</th>
+        <th>Dominio root</th>
+        <th>Fusi orari</th>
+      </thead>
+      <tr [ngClass]="{'highlighted' : paese.name === selectedCountry?.name}" *ngFor="let paese of paesi">
+        <td class="flag-col" [routerLink]="['country-details', paese?.alpha2Code]">
+          <!--<div [ngStyle]="{'backgroundImage':'url(' + paese.flag + ')'}" ></div>-->
+          <app-image-viewer [url]="paese.flag" (selectEvent)="manageCountrySelect(paese)"></app-image-viewer>
+        </td>
+        <td class="name-col">
+          {{paese.name}}
+        </td>
+        <td>
+          <div *ngIf="paese && paese.population"></div>
+          {{paese.population | number: '1.0-3':'it'}}
+        </td>
+        <td>
+          {{paese.capital}}
+        </td>
+        <td>
+          {{paese.topLevelDomain}}
+        </td>
+        <td>
+          <ul>
+            <li *ngFor="let timezone of paese.timezones;">
+              {{timezone}}
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+</div>
+</div>
+<div class="loading-spinner-bg" *ngIf="originalPaesi ? originalPaesi.length === 0: true">
+  <mat-spinner class="spinner"></mat-spinner>
+</div>
