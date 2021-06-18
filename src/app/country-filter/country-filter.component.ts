@@ -71,4 +71,9 @@ export class CountryFilterComponent implements OnInit {
     this.filterEvent.emit(filtered);
   }
 
+  reset() {
+    this.filterModel = new CountryFilter();
+    this.filterEvent.emit(this.countryList as unknown as []);
+  }
+
 }

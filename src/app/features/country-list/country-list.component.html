@@ -1,59 +1,64 @@
 
 <div class="container-fluid">
   <div class="country-select">
-    <p>
-      <strong>Seleziona un paese</strong>
-    </p>
-
-    <select class="browser-default custom-select custom-select-lg mb-3"  [(ngModel)]="selectedCountry" (change)="manageCountrySelect(selectedCountry)">
-      <option *ngFor="let country of originalPaesi" [ngValue]="country" [label]="country.name">
-      </option>
-    </select>
+    <mat-form-field>
+      <mat-select placeholder="Seleziona un Paese" name="selected-country" [(ngModel)]="selectedCountry" (selectionChange)="manageCountrySelect($event.value)">
+        <mat-option  *ngFor="let country of originalPaesi" [value]="country" >
+          {{ country.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
 
-  <br>
+  <app-country-filter class="country-filter" [countryList]="originalPaesi" (filterEvent)="manageFilterEvent($event)"></app-country-filter>
 
-  <app-country-filter [countryList]="originalPaesi" (filterEvent)="manageFilterEvent($event)"></app-country-filter>
+  <div class="content mat-elevation-z8" role="main" *ngIf="paesi && paesi.length !== 0">
 
-  <br>
+    <mat-table #table [dataSource]="dataSource" matSort>
 
-  <div class="content" role="main" *ngIf="paesi && paesi.length !== 0">
-    <table class="table">
-      <thead>
-        <th>Bandiera</th>
-        <th>Nome</th>
-        <th>Popolazione</th>
-        <th>Capitale</th>
-        <th>Dominio root</th>
-        <th>Fusi orari</th>
-      </thead>
-      <tr [ngClass]="{'highlighted' : paese.name === selectedCountry?.name}" *ngFor="let paese of paesi">
-        <td class="flag-col" [routerLink]="['country-details', paese?.alpha2Code]">
-          <!--<div [ngStyle]="{'backgroundImage':'url(' + paese.flag + ')'}" ></div>-->
-          <app-image-viewer [url]="paese.flag" (selectEvent)="manageCountrySelect(paese)"></app-image-viewer>
-        </td>
-        <td class="name-col">
-          {{paese.name}}
-        </td>
-        <td>
-          <div *ngIf="paese && paese.population"></div>
-          {{paese.population | number: '1.0-3':'it'}}
-        </td>
-        <td>
-          {{paese.capital}}
-        </td>
-        <td>
-          {{paese.topLevelDomain}}
-        </td>
-        <td>
+      <!-- Position Column -->
+      <ng-container matColumnDef="flag">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let paese" class="">
+          <app-image-viewer [ngStyle]="{'cursor': 'pointer'}" [url]="paese.flag" (selectEvent)="manageCountrySelect(paese)"></app-image-viewer>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef  mat-sort-header="name"> Nome </mat-header-cell>
+        <mat-cell *matCellDef="let paese"> {{paese.name}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="population" >
+        <mat-header-cell *matHeaderCellDef mat-sort-header="population"> Popolazione </mat-header-cell>
+        <mat-cell *matCellDef="let paese">  {{paese.population | number: '1.0-3':'it'}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="capital">
+        <mat-header-cell *matHeaderCellDef> Capitale </mat-header-cell>
+        <mat-cell *matCellDef="let paese"> {{paese.capital}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="topLevelDomain">
+        <mat-header-cell *matHeaderCellDef> Dominio root </mat-header-cell>
+        <mat-cell *matCellDef="let paese"> {{paese.topLevelDomain}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="timezones">
+        <mat-header-cell *matHeaderCellDef> Fusi orari </mat-header-cell>
+        <mat-cell *matCellDef="let paese">
           <ul>
             <li *ngFor="let timezone of paese.timezones;">
               {{timezone}}
             </li>
           </ul>
-        </td>
-      </tr>
-    </table>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
 </div>
 </div>
 <div class="loading-spinner-bg" *ngIf="originalPaesi ? originalPaesi.length === 0: true">

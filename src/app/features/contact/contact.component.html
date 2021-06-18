@@ -1,26 +1,30 @@
 <div class="container-contact2">
-  <div class="wrap-contact2">
-    <form class="contact2-form validate-form">
+  <div class="wrap-contact2 was-validated">
+    <form class="form-group contact2-form validate-form needs-validation" #f="ngForm" novalidate>
       <span class="contact2-form-title">
         Contattaci
       </span>
 
-      <div class="wrap-input2 validate-input" data-validate="Nome richiesto is required">
-        <input class="input2" type="text" name="name">
-        <span class="focus-input2" data-placeholder="NOME"></span>
+      <div class=" wrap-input2 validate-input input-group has-validation">
+        <input class="form-control input2" type="text" name="name"  id="name"  #name="ngModel" [(ngModel)]="nameVar" placeholder="NAME" required>
+        <div class="invalid-feedback" *ngIf="name.dirty && name.invalid">
+          Nome richiesto
+        </div>
       </div>
 
-      <div class="wrap-input2 validate-input alert-validate" data-validate="Una mail valida è richiesta: ex@abc.xyz">
-        <input class="input2" type="text" name="email">
-        <span class="focus-input2" data-placeholder="EMAIl"></span>
+      <div class="wrap-input2 validate-input input-group has-validation">
+        <input class="form-control input2" type="text" name="email" id="email" required [(ngModel)]="emailVar" placeholder="EMAIL" #email="ngModel" [pattern]="emailPattern">
+        <div class="invalid-feedback" *ngIf="email.dirty && email.invalid">
+          Email non valida
+        </div>
       </div>
 
-      <div class="wrap-input2 validate-input alert-validate" data-validate="Message is required">
-        <textarea class="input2" name="message"></textarea>
-        <span class="focus-input2" data-placeholder="MESSAGGIO"></span>
+      <div class="wrap-input2" >
+        <textarea class="input2" name="message" placeholder="MESSAGGIO"></textarea>
       </div>
 
-      <div class="container-contact2-form-btn">
+
+      <div class="container-fluid container-contact2-form-btn">
         <div class="wrap-contact2-form-btn">
           <div class="contact2-form-bgbtn"></div>
           <button class="contact2-form-btn">
@@ -28,6 +32,9 @@
           </button>
         </div>
       </div>
+
+
+
     </form>
   </div>
 </div>

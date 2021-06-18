@@ -2,7 +2,7 @@
   <div class="form-group">
     <div class="row mb-3">
       <div class="col-12 col-sm-6">
-        <label for="name">Name</label>
+        <label for="name">Nome</label>
         <input type="text" class="form-control" id="name" [(ngModel)]="filterModel.name" name="name">
       </div>
       <div class="col-12 col-sm-6">
@@ -22,10 +22,18 @@
     </div>
   </div>
 
-
   <br>
 
-  <button type="submit" class="btn btn-primary" [disabled]="filterForm.invalid">
-    Filtra
-  </button>
+  <div class="row">
+    <div class="col-2 col-xs-4">
+      <button type="submit" mat-button class="mat-raised-button"  color="primary" [disabled]="filterForm.invalid">
+        Filtra
+      </button>
+    </div>
+    <div class="col-2 col-xs-4">
+      <button mat-button color="warn" class="mat-raised-button" type="button" (click)="reset()">
+        Reset
+      </button>
+    </div>
+  </div>
 </form>
