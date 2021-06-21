@@ -25,6 +25,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatButtonModule } from '@angular/material/button';
+import { QuizComponent } from './features/quiz/quiz.component';
 
 registerLocaleData(localeFr, 'fr');
 registerLocaleData(localeIt, 'it');
@@ -38,7 +39,8 @@ registerLocaleData(localeIt, 'it');
     CountryDetailsComponent,
     NavComponent,
     CurrentWeatherComponent,
-    CountryFilterComponent
+    CountryFilterComponent,
+    QuizComponent
   ],
   imports: [
     BrowserModule,
