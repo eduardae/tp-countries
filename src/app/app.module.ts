@@ -25,6 +25,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatCardModule } from '@angular/material/card';
 import { QuizComponent } from './features/quiz/quiz.component';
 
 registerLocaleData(localeFr, 'fr');
@@ -57,7 +59,9 @@ registerLocaleData(localeIt, 'it');
     MatSelectModule,
     MatTableModule,
     MatSortModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTabsModule,
+    MatCardModule
   ],
   providers: [CountryService],
   bootstrap: [AppComponent]

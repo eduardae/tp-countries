@@ -5,4 +5,5 @@ export class QuizQuestion {
   answer: string;
   correct: boolean;
   countries: State[];
+  question: string;
 }
