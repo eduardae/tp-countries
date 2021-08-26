@@ -2,3 +2,35 @@
   border: 2px solid #666;
   background-color: #eee;
 }
+
+.quiz-info {
+  .img-container {
+    margin: auto;
+  }
+
+  .mat-card {
+    text-align: center;
+    margin-bottom: 16px;
+
+    span {
+      display: inline-block;
+      margin-top: 12px;
+    }
+  }
+
+  .mat-tab-body-content {
+    overflow-x: hidden !important;
+  }
+}
+
+.end-btn {
+  display: block !important;
+  width: 40%;
+  margin: 16px auto 16px auto !important;
+}
+
+.test-res {
+  text-align: center;
+  font-weight: bold;
+  padding-bottom: 24px;
+}

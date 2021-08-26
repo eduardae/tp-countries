@@ -10,11 +10,15 @@ export class ImageViewerComponent implements OnInit {
   @Input()
   url: string;
 
+  @Input()
+  name: string;
+
   @Output()
   selectEvent = new EventEmitter();
 
   constructor() {
     this.url = '';
+    this.name = '';
   }
 
   ngOnInit(): void {

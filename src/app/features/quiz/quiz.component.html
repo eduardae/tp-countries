@@ -1,15 +1,15 @@
-<div *ngIf="quizInfo" class="container-fluid">
-  <mat-tab-group>
-    <mat-tab label="Domanda {{i +1}}" *ngFor='let question of quizInfo.questions; let i = index;'>
+<div *ngIf="quizInfo" class="container-fluid quiz-info">
+  <mat-tab-group [(selectedIndex)]="activeQuestion" *ngIf="!showResult">
+    <mat-tab label="Domanda {{i +1}}" *ngFor='let question of quizInfo.questions; let i = index;' >
       <div class="row mt-4 mb-4">
         <div class="col">
           <h4>{{question.question}}</h4>
         </div>
       </div>
       <div class="row">
-        <div class="col-4 {{question.answer === option.alpha2Code ? 'selected': ''}}" *ngFor='let option of question.countries'>
-          <mat-card (click)="selectAnswer(question, option)">
-            <app-image-viewer [ngStyle]="{'cursor': 'pointer'}" [url]="option.flag"></app-image-viewer>
+        <div class="col-4" *ngFor='let option of question.countries'>
+          <mat-card class="{{question.answer === option.alpha2Code ? 'selected': ''}}" (click)="selectAnswer(question, option)">
+            <app-image-viewer [ngStyle]="{'cursor': 'pointer'}" [url]="option.flag" [name]="option.name"></app-image-viewer>
           </mat-card>
         </div>
       </div>
@@ -18,14 +18,19 @@
 
   <div class="container">
 
-    <div class="row">
-      <button type="button" mat-button class="mat-raised-button"  color="primary" (click)="showResults()">
+    <div class="row" *ngIf="!showResult">
+      <button type="button" mat-button class="end-btn mat-raised-button"  color="primary" (click)="showResults()">
         Termina il quiz
       </button>
     </div>
     <div class="row" *ngIf="showResult">
+      <button type="button" mat-button class="end-btn mat-raised-button"  color="warn" (click)="reset()">
+        Nuovo quiz
+      </button>
+    </div>
+    <div class="row test-res" *ngIf="showResult">
       <p>
-        {{ checkScore() }} /  {{quizInfo.questions.length}}
+        Risposte esatte: {{ checkScore() }} /  {{quizInfo.questions.length}}
       </p>
     </div>
   </div>

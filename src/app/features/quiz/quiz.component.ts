@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { QuizInfo } from 'src/app/models/quiz-info';
 import { QuizQuestion } from 'src/app/models/quiz-question';
 import { State } from 'src/app/models/state';
@@ -7,7 +7,8 @@ import { CountryService } from 'src/app/country.service';
 @Component({
   selector: 'app-quiz',
   templateUrl: './quiz.component.html',
-  styleUrls: ['./quiz.component.scss']
+  styleUrls: ['./quiz.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class QuizComponent implements OnInit {
 
@@ -18,16 +19,22 @@ export class QuizComponent implements OnInit {
   showResult = false;
   possibleQuestionTopics = ['area', 'population', 'capital', 'alpha2Code'];
 
+  countriesData: any;
+
+  activeQuestion: number = 0;
+
   constructor(private countryService: CountryService) { }
 
   ngOnInit(): void {
     this.countryService.getCountries().subscribe((data: any) => {
+      this.countriesData = data;
       this.generateQuiz(data);
     });
   }
 
   selectAnswer(question: QuizQuestion, selectedCountry: State) {
     question.answer = selectedCountry.alpha2Code;
+    this.activeQuestion++;
   }
 
   generateQuiz(countries: State[]) {
@@ -81,6 +88,11 @@ export class QuizComponent implements OnInit {
 
   showResults() {
     this.showResult = true;
+  }
+
+  reset() {
+    this.generateQuiz(this.countriesData);
+    this.showResult = false;
   }
 
   checkScore() {
