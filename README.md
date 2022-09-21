@@ -1,3 +1,5 @@
+# This is an app made in the context of an Angular course promoted by my firm.
+
 # Live Demo
 
 See the demo running on heroku: [link](https://tp-countries.herokuapp.com/country-list)
